@@ -1,0 +1,243 @@
+/*
+ * CSS for SimplyUI,  A W3S Framework
+ * version: 0.1 (2011.11.1)
+ * @requires jQuery v1.4 or later
+
+ * Licensed under the GNU General Public License
+ *   http://www.gnu.org/licenses/gpl.html
+ *
+ * @author Qiang Yu <kevin@w3sofwwares.com>
+
+ * @credit:
+ *	Icons in this file mostly come from famfamfam <http://www.famfamfam.com>
+ */
+
+/** Initialization **/
+html,body,div,h1,h2,h3,h4,h5,h6,p,img,dl,dt,dd,ol,ul,li,table,caption,tbody,tfoot,thead,tr,th,td,form,fieldset,embed,object,applet {margin:0;padding:0;border:0;}
+
+html, body {
+	font-family:arial,sans-serif;
+	height: 100%;
+	width: 100%;
+}
+
+/*** Layout ****/
+body>div.w3s-footer, body>div.w3s-body, body>div.w3s-footer {
+	float:left;
+	width:100%;
+	background-color:#eee;
+}
+
+body>div>div.w3s-wrapper>div.w3s-column {
+	float:left;
+	min-height:100px;
+}
+body>div>div.w3s-wrapper {
+	width:1024px;
+	padding:0;
+	margin:0 auto;
+}
+.w3s-column>div {
+	padding:10px;
+}
+.w3s-width-p20 {width:20%;}
+.w3s-width-p30 {width:30%;}
+.w3s-width-p50 {width:50%;}
+.w3s-width-p70 {width:70%;}
+.w3s-width-p80 {width:80%;}
+.w3s-width-p100 {width:100%;}
+/**** end of layout ***/
+/** Functional classes **/
+.w3s-clear {clear:both;margin:0; padding:0;border:0;height:0px;overflow:hidden;}
+.w3s-left {float:left;}
+.w3s-right {float:right;}
+.w3s-bold {font-weight:bold;}
+.w3s-ralign {text-align:right;}
+.w3s-lalign {text-align:left;}
+.w3s-malign {text-align:center !important;}
+.w3s-relative {position:relative;}
+.w3s-hidden {display:none;}
+.w3s-invisible {visibility:hidden;}
+.w3s-disabled {filter:alpha(opacity=50); opacity:0.5;}
+.w3s-none {background:transparent !important;border:0 !important;}
+.w3s-error {color:red;}
+
+.w3s-loading {height:100%;z-index:1000;background:#eee url('images/ajax-loader.gif') no-repeat center center !important; opacity:0.6; filter:alpha(opacity=60);}
+.w3s-radius {-moz-border-radius:4px;-webkit-border-radius: 4px;}
+.w3s-shadow {-moz-box-shadow: 5px 5px 5px #ccc;-webkit-box-shadow: 5px 5px 5px #ccc;box-shadow: 5px 5px 5px #ccc;}
+
+.w3s-numeric {text-align:right!important;}
+.w3s-desc {font-size:.9em;font-style:italic;overflow:hidden;}
+
+textarea {width:100%; margin:0 auto;}
+input[type="password"] {width:10em;margin:0;padding:2px 0;border-width:2px;}
+input[type="text"] {width:100%;margin:0;padding:2px 0;border-width:2px;}
+input[type="text"].w3s-cell {background:transparent;cursor:pointer;border-color:transparent;}
+input[type="text"].w3s-cell:hover {border-color:gray;}
+input[type="text"].w3s-dirty {padding-left:10px;background:transparent url(images/dirty.gif) top left no-repeat;cursor:pointer;}
+input[type="text"].w3s-date {width:6em !important;}
+input[type="text"].w3s-search {width:12em !important;}
+input.w3s-error {background-color:#FFAEB9 !important;color:black;}
+input.w3s-mandatory {background:url(images/bullet_star.png) right top no-repeat;}
+
+th {background:#777777;color:#fff;border-left:1px solid #EEEEEE;padding:3px;}
+
+/*** Widgets default ****/
+/*** menu
+ *  normal  <background,font,border>:<#888888,#333333,transparent>
+ *  hover   <background,font,border>:<#666666/#333333,#FFFFFF,#EEEEEE>
+***/
+div.w3s-menu {height:30px;margin:0;background:#888888;}
+   .w3s-menu li a {display:block;height:100%;text-align:center;text-decoration:none;width:8em;padding:5px 10px;background:transparent;color:#333333;}
+   .w3s-menu li a span {display:inline-block;width:100%;height:100%;}
+   .w3s-menu >ul {list-style:none;}
+   .w3s-menu >ul>li {float:left;position:relative;border-right:1px solid transparent;}
+   .w3s-menu >ul>li.w3s-last {border-right:0;}
+   .w3s-menu >ul>li ul {padding:5px;background:#666666;display:none;height:auto;filter:alpha(opacity=95);opacity:0.95;position:absolute;}
+   .w3s-menu >ul>li.w3s-last ul {right:0;}
+   .w3s-menu li li {display:block;float:none;}
+   .w3s-menu li li.w3s-sub span:before {content:':: ';}
+   .w3s-menu li li.w3s-menutitle a {font-weight:bold;cursor:text;}
+   .w3s-menu li li a {text-align:left;width:16em;border-bottom:1px dotted #888888;}
+   .w3s-menu li:hover a {background:#666666;color:#FFFFFF;cursor:pointer;}
+   .w3s-menu li:hover > ul {display:block;}
+   .w3s-menu li li:hover a {background:#333333;}
+
+/*** dropdown
+ * header <background,font,border>:<transparent,#333333, none>
+ * dropdownBox <background,font,border>:<#EEEEEE,#333333,#AAAAAA>
+ * li:hover <background><#FFFFFF>
+***/
+.w3s-dropdown {font:caption;font-size:.95em;}
+.w3s-dropdown .w3s-header {background:url(images/cog.png) no-repeat right center;cursor:pointer;padding:5px;padding-right:25px;color:#333333;}
+.w3s-dropdown .w3s-header.w3s-open {background:url(images/cog_delete.png) no-repeat right center;}
+.w3s-dropdown .w3s-body {position:absolute;display:none;background:#EEEEEE;filter:alpha(opacity=80); opacity:0.8;border:1px solid #AAAAAA;}
+.w3s-dropdown ul {list-style:none;}
+.w3s-dropdown li {background:transparent;padding:5px;min-width:20em;border-bottom:1px solid #AAAAAA;}
+.w3s-dropdown li a {text-decoration:none;color:#333333;display:block;width:100%;}
+.w3s-dropdown li:hover {background:#FFFFFF;}
+
+/** buttons based on 16x16 icon **/
+.w3s-button {padding:2px;}
+.w3s-button a {margin:0 2px;display:inline-block;text-decoration:none;text-align:center;padding:3px 6px;font-size:13px;cursor:pointer;}
+.w3s-button a.w3s-icon {background-position: center !important;background-repeat:no-repeat !important;vertical-align:bottom;border-color:transparent;background-color:transparent;width:20px;height:16px;}
+.w3s-button a.w3s-icon:after {content:url(images/spacer.gif);}
+.w3s-button a.w3s-left-icon {background-position:left center !important;background-repeat:no-repeat !important;padding-left:20px;}
+.w3s-button a.w3s-right-icon {background-position:right center !important;background-repeat:no-repeat !important;padding-right:20px;}
+.w3s-button a.w3s-icon-xxx {background-image:url(images/icon/xxx.png) !important;}
+.w3s-button a:hover {border-color:#aaa;background-color:#eee;}
+.w3s-button a {background:#ddd;color:#333;border:1px solid #ccc;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
+
+a.w3s-icon-up {background-image:url(/resources/icons/fam/arrow_up.png) !important;}
+a.w3s-icon-down {background-image:url(/resources/icons/fam/arrow_down.png) !important;}
+a.w3s-icon-edit {background-image:url(/resources/icons/fam/page_white_edit.png) !important;}
+a.w3s-icon-close {background-image:url(/resources/icons/fam/cancel.png) !important;}
+a.w3s-icon-refresh {background-image:url(/resources/icons/fam/arrow_refresh.png) !important;}
+a.w3s-icon-add {background-image:url(/resources/icons/fam/add.png) !important;}
+a.w3s-icon-delete {background-image:url(/resources/icons/fam/delete.png) !important;}
+
+.w3s-bar .w3s-button {visibility:hidden;}
+.w3s-bar:hover .w3s-button {visibility:visible;}
+
+/** autocomplete **/
+ul.w3s-autocomplete {list-style:none;z-index:100;background:#fff;color:gray;padding:5px;border:1px solid gray;position:absolute;line-height:20px;overflow:auto;}
+ul.w3s-autocomplete li:hover {background:#eee;color:black;}
+input.w3s-autocomplete {padding-left:5px;padding-right:5px;}
+
+/*** tree ***/
+div.w3s-tree ul {list-style-type:none;list-style-position:inside;padding:0px;margin:0px;}
+div.w3s-tree ul li {padding:3px;padding-left:1em;}
+div.w3s-tree li>ul {display:none;}
+   .w3s-tree li>span {padding-left:2em;}
+   .w3s-tree .w3s-node {background:url(images/folder.gif) no-repeat left 3px;padding-left:20px;}
+   .w3s-tree .w3s-nodeopen {background:url(images/folderopen.gif) no-repeat left 3px;padding-left:20px;}
+   .w3s-tree .w3s-leaf {background:url(images/page.gif) no-repeat left center;padding-left:20px;}
+
+/*** accordion ***/
+div.w3s-accordion {margin:0;padding:0;width:20em;height:20em;border:1px solid #777777;background:#EEEEEE;}
+   .w3s-accordion >ul>li {background:#AAAAAA;color:#FFFFFF;border:1px solid #777777;margin:0;padding:0;height:25px;}
+   .w3s-accordion >ul>li a {text-decoration:none;color:#fff;display:block;padding:0 5px;}
+   .w3s-accordion >ul>li a span {width:100%;vertical-align:middle;}
+   .w3s-accordion >ul>div.w3s-body {overflow:auto;display:none;padding:0;margin:0;overflow:auto;}
+   .w3s-accordion >ul>div.w3s-body>div {min-height:100%;}
+
+/*** tab ***/
+div.w3s-tab >ul {margin:0;padding:0;list-style:none;height:1.6em;}
+   .w3s-tab >ul>li {float:left;}
+   .w3s-tab >ul>li a {display:block;text-align:center;text-decoration:none;height:1.6em;width:7em;background:transparent;color:#666666;;}
+   .w3s-tab >ul>li a:hover {background:#AAAAAA;color:#fff;}
+   .w3s-tab >ul>li {margin: 0 2px;border:1px solid #AAAAAA;border-bottom:0;border-top-left-radius:4px;-webkit-border-top-left-radius:4px;border-top-right-radius: 4px;-webkit-border-top-right-radius: 4px;}
+   .w3s-tab >ul>li.w3s-selected a {background:#AAAAAA;color:#fff;}
+   .w3s-tab >div.w3s-body {border-top:1px solid #AAAAAA;}
+   .w3s-tab >div.w3s-body div {padding:.5em;text-align:left;}
+   .w3s-tab li a span {vertical-align:middle;}
+
+div.w3s-rotator {position:relative;}
+   .w3s-rotator>div {height:100%;width:100%;}
+
+
+.w3s-box {}
+.w3s-fullbox {height:100%;}
+.w3s-mainbox {padding:0;margin:0;overflow:hidden;}
+.w3s-scrollbox {overflow:auto;}
+
+div.w3s-popup {background:transparent;}
+   .w3s-popup div.w3s-box {margin:0;padding:0;border:1px solid #788B21;width:1px;height:0;overflow:hidden;}
+
+div.w3s-box .w3s-header {height:auto;margin:0;padding:0;background:#788B21;font-family:Arial;}
+div.w3s-box .w3s-header h1.w3s-title {padding:5px;font-size:14px;font-weight:bold;color:#fff;}
+div.w3s-box .w3s-header div.w3s-button {padding:0;float:right;font-size:13px;}
+div.w3s-box .w3s-header div.w3s-button a {padding:0;margin:2px 0;}
+div.w3s-box .w3s-body {background:white;padding:1.5em;overflow-y:auto;}
+div.w3s-box .w3s-footer {padding:5px;height:30px;background:#E2ECB2;border-top:1px solid #788B21;}
+div.w3s-box .w3s-footer div.w3s-button {float:right;padding-right:1em;}
+div.w3s-box .w3s-footer div.w3s-button a {background:#fff;color:#333;font-weight:bold;}
+
+div.w3s-float {position:absolute,z-index:100;border-width:1px;border-style:solid;}
+div.w3s-modal {position:fixed;left:0;top:0;height:100%;width:100%;background:url('images/op1px.png');}
+div.w3s-overlap {background:#A8BD4E;filter:alpha(opacity=90); opacity:0.9;}
+div.w3s-overlap div.w3s-box {margin:0;padding:0;border:1px solid #788B21;height:100%;overflow:hidden;}
+
+/*** table ***/
+table tr.w3s-none td {background:transparent;border:0 !important;}
+      tr.w3s-title >td, tr.w3s-title >th, td.w3s-title {background-color:#AAAAAA !important;font-weight:bold;padding-left:1em;border:0;}
+
+table.w3s-list {border-collapse:collapse;width:100%;margin:0;padding:0;}
+table.w3s-list td {border-bottom:1px dotted gray;background:#fafafa;}
+table.w3s-list tr:hover >td {border-bottom-style:solid;background:#fff;}
+table.w3s-list caption {
+    background:url(images/table.png) no-repeat left center;
+    margin:5px 0;
+    padding:0 20px;
+    height:18px;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
+/*** grid ***/
+.w3s-grid {padding:0;margin:0;border:0;}
+.w3s-grid >div {border:1px solid #AAAAAA;}
+.w3s-grid table {margin:0;padding:0;border-collapse:collapse;border:0;}
+.w3s-grid th {border:0;text-align:left;margin:0;padding:5px 0;border-left:1px solid #AAAAAA !important;}
+.w3s-grid td {text-align:left;margin:0;padding:5px;border:1px solid #AAAAAA !important;border-left:0 !important;}
+.w3s-grid th span {padding-left:5px;}
+.w3s-grid th:first-child {border-left:0 !important;}
+.w3s-grid div.w3s-mainbox {overflow:hidden;overflow-y:scroll !important;}
+.w3s-grid .w3s-mainbox th {border-color:transparent !important;}
+.w3s-grid .w3s-mainbox table {border-top:0;}
+.w3s-grid tr.w3s-footer {background:#AAAAAA;color:#FFFFFF;}
+.w3s-grid .w3s-footer td {padding:5px 0;border-color:transparent !important; background:transparent;}
+.w3s-grid .w3s-footer td span {padding:0 5px;}
+.w3s-grid h1.w3s-header {
+    background:url(images/table.png) no-repeat left center;
+    margin:5px 0;
+    padding:0 20px;
+    height:18px;
+    font-family:Arial;
+    font-size:15px;
+    font-weight:bold;
+    text-decoration:none;
+}
+
