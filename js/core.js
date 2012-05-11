@@ -946,6 +946,7 @@ W3S.Core.Event.Handler = {
         if (options) $.extend(conf, options);
 
         return this.each(function() {
+			if (!conf.url) conf.url = $(this).attr('action');
             if ($(this).find('input[type="file"]').length>0) {
                 // form with file uploading, using iframe to do the job
                 // insert ifrme dom
