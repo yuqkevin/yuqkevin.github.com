@@ -128,13 +128,13 @@ div.w3s-menu {height:30px;margin:0;background:#888888;}
 .w3s-button a:hover {border-color:#aaa;background-color:#eee;}
 .w3s-button a {background:#ddd;color:#333;border:1px solid #ccc;border-radius:3px;-moz-border-radius:3px;-webkit-border-radius:3px;}
 
-a.w3s-icon-up {background-image:url(/resources/icons/fam/arrow_up.png) !important;}
-a.w3s-icon-down {background-image:url(/resources/icons/fam/arrow_down.png) !important;}
-a.w3s-icon-edit {background-image:url(/resources/icons/fam/page_white_edit.png) !important;}
-a.w3s-icon-close {background-image:url(/resources/icons/fam/cancel.png) !important;}
-a.w3s-icon-refresh {background-image:url(/resources/icons/fam/arrow_refresh.png) !important;}
-a.w3s-icon-add {background-image:url(/resources/icons/fam/add.png) !important;}
-a.w3s-icon-delete {background-image:url(/resources/icons/fam/delete.png) !important;}
+a.w3s-icon-up {background-image:url(images/arrow_up.png) !important;}
+a.w3s-icon-down {background-image:url(images/arrow_down.png) !important;}
+a.w3s-icon-edit {background-image:url(images/page_white_edit.png) !important;}
+a.w3s-icon-close {background-image:url(images/cancel.png) !important;}
+a.w3s-icon-refresh {background-image:url(images/arrow_refresh.png) !important;}
+a.w3s-icon-add {background-image:url(images/add.png) !important;}
+a.w3s-icon-delete {background-image:url(images/delete.png) !important;}
 
 .w3s-bar .w3s-button {visibility:hidden;}
 .w3s-bar:hover .w3s-button {visibility:visible;}
