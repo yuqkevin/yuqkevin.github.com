@@ -11,7 +11,6 @@
 
 var W3S = W3S || {};
 W3S.Core = W3S.Core||{};
-W3S.Core.language = $('html').attr('lang')?$('html').attr('lang').toLowerCase():'en';
 W3S.Core.sequence = W3S.Core.sequence || 1;  // shared sequence for generic use
 W3S.Core.curTrigger;
 W3S.Core.Store = W3S.Core.Store||{};
@@ -79,7 +78,7 @@ W3S.Core.Util = {
     //read url from a.href and remove base url (which automatically added in IE)
     getHref: function(a) {
         var baseUrl = window.location.href.substring(0, window.location.href.lastIndexOf("/") + 1);
-        return  a.attr('href')?a.attr('href').replace(baseUrl,""):'';
+        return  a.getAttr('href').replace(baseUrl,"");
     },
     // retrieve html of a given object (include wrapper)
     getHtml: function(obj) {
@@ -335,7 +334,7 @@ W3S.Core.Event = {
         // remember trigger which is not form submit or .w3s-tmp
         if (!a.hasClass('w3s-tmp')&&a.attr('name')!='submit') W3S.Core.curTrigger = a;
         if (a.hasClass('w3s-disabled')) return false;
-        if (a.attr('rel').length<1 || confirm(a.attr('rel'))) {
+        if (!a.getAttr('rel') || confirm(a.attr('rel'))) {
             W3S.Core.Event.Handler.triggerParse(a, evt);
         }
         return a.hasClass('w3s-stop')?false:true;
@@ -367,13 +366,13 @@ W3S.Core.Event = {
 };
 W3S.Core.Event.Handler = {
     triggerParse: function(trigger, evt) {
-        if (trigger.attr('name')==undefined) return false; // no trigger name defined
+        if (!trigger.getAttr('name')) return false; // no trigger name defined
         var types = trigger.attr('name').split(',');
-        var targets = trigger.attr('target')?trigger.attr('target').split(','):[];
-        var urls = trigger.attr('href')?W3S.Core.Util.getHref(trigger).split(','):[];
-        var title = trigger.attr('title')?trigger.attr('title'):trigger.html();
+        var targets = trigger.hasAttr('target')?trigger.attr('target').split(','):[];
+        var urls = trigger.hasAttr('href')?W3S.Core.Util.getHref(trigger).split(','):[];
+        var title = trigger.hasAttr('title')?trigger.attr('title'):trigger.html();
         var attr = trigger.attr('class').split(/\s+/);
-        var extra = trigger.attr('rev')?trigger.attr('rev'):'';
+        var extra = trigger.hasAttr('rev')?trigger.attr('rev'):'';
         for (i=0;i<types.length;i++) {
             var type = types[i];
             var target = W3S.Core.Util.formatId(targets[i]);
@@ -919,6 +918,19 @@ W3S.Core.Event.Handler = {
             });
         }
     };
+	// check if attribute is defined
+    $.fn.hasAttr = function(attrName) {
+        var undefined;
+        var attr = $(this).attr(attrName);
+        return !(attr===undefined||attr===false);
+    };
+	// read the attribute or given empty string undefined
+	$.fn.getAttr = function(attrName, defaultVal) {
+		var undefined;
+		var attr = $(this).attr(attrName);
+		if (attr===undefined||attr===false) attr = '';
+		return attr?attr:(defaultVal!==undefined?defaultVal:'');
+	};
     // W3S box widgets
     $.fn.w3sBox = function(method, options) {
         if (methods[method]) {
@@ -946,7 +958,7 @@ W3S.Core.Event.Handler = {
         if (options) $.extend(conf, options);
 
         return this.each(function() {
-			if (!conf.url) conf.url = $(this).attr('action');
+            if (!conf.url) conf.url = $(this).attr('action');
             if ($(this).find('input[type="file"]').length>0) {
                 // form with file uploading, using iframe to do the job
                 // insert ifrme dom
@@ -1002,6 +1014,7 @@ W3S.Core.Event.Handler = {
 })(jQuery);
 
 $(document).ready(function(){
+	W3S.Core.language = $('html').getAttr('lang','en').toLowerCase();
     $('a.w3s-trigger').live('click', W3S.Core.Event.trigger);
     $('a.w3s-mover').live('mouseover mouseout', W3S.Core.Event.trigger);
     $('input.w3s-cell').live('click', W3S.Core.Event.cell);
