@@ -609,7 +609,7 @@ W3S.Core.Event.Handler = {
                 recursive: true
             }
             conf = $.extend(conf, options);
-            var resize = W3SConf!==W3S.Core.Constant.undefined&&W3SConf['resize']===true?true:false;
+            var resize = typeof W3SConf!=='undefined'&&W3SConf['resize']===true?true:false;
             if (resize) $('html,body').css('overflow','hidden'); // keeps scrollbar off IE
             return this.each(function() {
                 if (conf.force) $(this).addClass('w3s-mainbox');
