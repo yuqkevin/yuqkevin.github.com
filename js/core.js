@@ -27,8 +27,9 @@ W3S.Core.Store.Dom = {
     set: function(target, name, val) {
         var targetId = W3S.Core.Util.formatId(target);
         var storeId = '_var'+targetId.substring(1)+'-'+name;
+		var storeCls = 'w3s-store_'+name;
         if ($('#'+storeId).html() == null) {
-            $(targetId).addClass('w3s-target').before('<div id="'+storeId+'" class="w3s-store" style="display:none;height:0;width:0;">'+val+'</div>');
+            $(targetId).addClass('w3s-target').before('<div id="'+storeId+'" class="'+storeCls+'" style="display:none;height:0;width:0;">'+val+'</div>');
         } else {
             $('#'+storeId).text(val);
         }
@@ -196,16 +197,20 @@ W3S.Core.Ajax = {
     },
     //reload a W3S box with the url stored in the W3S.Core.Store.Dom
     refresh: function(targetId) {
-		var id = W3S.Core.Util.formatId(targetId);
-		var target = $(id);
-		if (!target.hasClass('w3s-store')) {
-			// find cloeset box to refresh
-			id = target.closest('.w3s-store').attr('id');
+		var id = targetId;
+		var target = $(W3S.Core.Util.formatId(targetId));
+		while (target.not('body')&&!target.siblings('.w3s-store_url')) {
+			// find cloisest reloadable target
+			target = target.parent();
 		}
-        var url = W3S.Core.Store.Dom.get(targetId, 'url');
-        if (typeof url == 'string' && url.length>=1) {
-             W3S.Core.Ajax.action(url, targetId,{},{'refresh':true});
-        }
+		if (target.is('body')) {
+			// not found, reload whole page instead
+			window.location.reload();
+			return false;
+		}
+		// reload target
+		var url = W3S.Core.Store.Dom.get(id, 'url');
+        W3S.Core.Ajax.action(url, id,{},{'refresh':true});
         return false;
     },
     // handler for success ajax post
