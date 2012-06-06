@@ -458,7 +458,7 @@ W3S.Core.Event.Handler = {
                         // jquery third-party plugin ajaxForm installed
                         form.ajaxForm(conf);
                     } else {
-                        // no using w3sForm
+                        // using w3sForm
                         form.w3sForm(conf);
                     }
                 }
