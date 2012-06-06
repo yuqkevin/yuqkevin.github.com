@@ -209,6 +209,7 @@ W3S.Core.Ajax = {
 			return false;
 		}
 		// reload target
+		if (id!==targetId) id = target.getAttr('id');
 		var url = W3S.Core.Store.Dom.get(id, 'url');
         W3S.Core.Ajax.action(url, id,{},{'refresh':true});
         return false;
