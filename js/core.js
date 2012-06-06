@@ -466,7 +466,6 @@ W3S.Core.Event.Handler = {
                 }
                 var conf = {'dataType':'json','beforeSubmit':W3S.Core.Ajax.beforeSubmit,'success':W3S.Core.Ajax.success};
                 if (form.find('input[type="file"]').length>0) conf['dataType'] = 'html';
-console.log(trigger);
                 if (form.is('.w3s-ajax')&&(form.data('events')===W3S.Core.Constant.undefined||form.data('events').submit.length<1)) {
 					// for the form haven't bind submit event
                     if (jQuery().ajaxForm) {    // check plugin first
@@ -479,11 +478,12 @@ console.log(trigger);
                 }
                 if (!form.find('input[name="_token"]').length) {
                     var token = trigger.text();
-                    if (options.url&&options.url.length>1) {
+                    if (options.url&&options.url!=='#') {
                         token = options.url.substr(0,1)=='#'?options.url.substr(1):options.url;
                     }
                     form.append('<input type="hidden" name="_token" value="'+token+'" />');
                 }
+				form.append('<input type="hidden" name="_button" value="'+trigger.getAttr('name')+'" />');
                 form.trigger('submit');
                 break;
             case 'popup':
