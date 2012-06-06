@@ -481,9 +481,8 @@ W3S.Core.Event.Handler = {
                     if (options.url&&options.url!=='#') {
                         token = options.url.substr(0,1)=='#'?options.url.substr(1):options.url;
                     }
-                    form.append('<input type="hidden" name="_token" value="'+token+'" />');
+                    form.append('<input type="hidden" name="_button" value="'+token+'" />');
                 }
-				form.append('<input type="hidden" name="_button" value="'+trigger.getAttr('name')+'" />');
                 form.trigger('submit');
                 break;
             case 'popup':
