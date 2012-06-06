@@ -199,7 +199,7 @@ W3S.Core.Ajax = {
     refresh: function(targetId) {
 		var id = targetId;
 		var target = $(W3S.Core.Util.formatId(targetId));
-		while (target.not('body')&&target.siblings('.w3s-store_url')<1) {
+		while (target.not('body')&&target.siblings('.w3s-store_url').length<1) {
 			// find cloisest reloadable target
 			target = target.parent();
 		}
