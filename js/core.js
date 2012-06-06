@@ -197,7 +197,6 @@ W3S.Core.Ajax = {
     },
     //reload a W3S box with the url stored in the W3S.Core.Store.Dom
     refresh: function(targetId) {
-		var id = targetId;
 		var target = $(W3S.Core.Util.formatId(targetId));
 		while (target.not('body')&&target.siblings('.w3s-store_url').length<1) {
 			// find cloisest reloadable target
@@ -209,7 +208,7 @@ W3S.Core.Ajax = {
 			return false;
 		}
 		// reload target
-		if (id!==targetId) id = target.getAttr('id');
+		var id = target.getAttr('id');
 		var url = W3S.Core.Store.Dom.get(id, 'url');
         W3S.Core.Ajax.action(url, id,{},{'refresh':true});
         return false;
