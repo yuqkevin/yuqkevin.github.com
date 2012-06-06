@@ -373,7 +373,7 @@ W3S.Core.Event = {
         return true;
     },
     resize: function(evt){
-        var container = evt.currentTarget.nodeName == undefined?'body':evt.currentTarget;
+        var container = evt.currentTarget.nodeName===W3S.Core.Constant.undefined?'body':evt.currentTarget;
         $(container).find(':visible.w3s-mainbox').w3sBox('resize');
     }
 };
@@ -577,7 +577,7 @@ W3S.Core.Event.Handler = {
             
             var conf = {
                 'headerCls':$.inArray('w3s-noHeader', options.attr)>=0?'w3s-hidden':'',
-                'title':options.title==undefined?'Popup Window':options.title,
+                'title':options.title===W3S.Core.Constant.undefined?'Popup Window':options.title,
                 'topBtns':topBtn,
                 'callback':options.callback
             };
@@ -609,7 +609,7 @@ W3S.Core.Event.Handler = {
                 recursive: true
             }
             conf = $.extend(conf, options);
-            var resize = typeof W3SConf!=='undefined'&&W3SConf['resize']===true?true:false;
+            var resize = W3SConf!==W3S.Core.Constant.undefined&&W3SConf['resize']===true?true:false;
             if (resize) $('html,body').css('overflow','hidden'); // keeps scrollbar off IE
             return this.each(function() {
                 if (conf.force) $(this).addClass('w3s-mainbox');
