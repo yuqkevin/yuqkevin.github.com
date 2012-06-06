@@ -505,12 +505,11 @@ W3S.Core.Event.Handler = {
     popup: function(boxId, options) {
         var body = $(W3S.Core.Util.formatId(boxId)+'>.w3s-body');
         var bodyDiv = $(W3S.Core.Util.formatId(boxId)+'>.w3s-body>div');
-		if (bodyDiv) {
-        	body.width(bodyDiv.outerWidth(true)).height(bodyDiv.outerHeight(true));
-        	$(W3S.Core.Util.formatId(boxId)).width(body.outerWidth(true)).height(body.outerHeight(true));
-        	W3S.Core.Util.center(boxId);
-        	if (options.url) W3S.Core.Store.Dom.set(options.bodyId, 'url', options.url);
-		}
+        body.width(bodyDiv.outerWidth(true));
+		body.height(bodyDiv.outerHeight(true));
+        $(W3S.Core.Util.formatId(boxId)).width(body.outerWidth(true)).height(body.outerHeight(true));
+        W3S.Core.Util.center(boxId);
+        if (options.url) W3S.Core.Store.Dom.set(options.bodyId, 'url', options.url);
     }
 };
 
