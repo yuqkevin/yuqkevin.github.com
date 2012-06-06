@@ -505,9 +505,11 @@ W3S.Core.Event.Handler = {
     popup: function(boxId, options) {
         var body = $(W3S.Core.Util.formatId(boxId)+'>.w3s-body');
         var bodyDiv = $(W3S.Core.Util.formatId(boxId)+'>.w3s-body>div');
+		var box = $(W3S.Core.Util.formatId(boxId));
         body.width(bodyDiv.outerWidth(true));
 		body.height(bodyDiv.outerHeight(true));
-        $(W3S.Core.Util.formatId(boxId)).width(body.outerWidth(true)).height(body.outerHeight(true));
+        box.width(body.outerWidth(true));
+		box.height(body.outerHeight(true));
         W3S.Core.Util.center(boxId);
         if (options.url) W3S.Core.Store.Dom.set(options.bodyId, 'url', options.url);
     }
