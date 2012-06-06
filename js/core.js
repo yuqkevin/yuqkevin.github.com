@@ -464,7 +464,8 @@ W3S.Core.Event.Handler = {
                 }
                 var conf = {'dataType':'json','beforeSubmit':W3S.Core.Ajax.beforeSubmit,'success':W3S.Core.Ajax.success};
                 if (form.find('input[type="file"]').length>0) conf['dataType'] = 'html';
-                if (form.is('.w3s-ajax')&&form.data('events').submit.length<1) {
+                if (form.is('.w3s-ajax')&&(typeof form.data('events')==undefined||form.data('events').submit.length<1)) {
+					// for the form haven't bind submit event
                     if (jQuery().ajaxForm) {    // check plugin first
                         // jquery third-party plugin ajaxForm installed
                         form.ajaxForm(conf);
