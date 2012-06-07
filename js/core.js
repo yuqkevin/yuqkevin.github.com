@@ -332,12 +332,12 @@ console.log('type:'+type+'  tag:'+tag);
 						var len = parseInt(type.substr(tag));
 						if (len>0) {
 							rexp +='{'+len+',}';
-						} else if (tag=='w3s-data-mandatory') {
-							rexp +='+';
 						}
 					} else {
 						return '';
 					}
+				} else if (tag=='w3s-data-mandatory'){
+					rexp +='+';
 				}
 				rexp = '/^'+rexp+'$/';
 console.log('regexp:'+rexp+' result:'+val.match(rexp));
@@ -357,7 +357,7 @@ console.log('regexp:'+rexp+' result:'+val.match(rexp));
             error = W3S.Core.Ajax.fieldValidation($(this));
             if (error) {
                 $(this).addClass(conf.errCls);
-                return;
+                return error;
             }
         });
         return error;
