@@ -348,7 +348,7 @@ W3S.Core.Ajax = {
     // form data validation
     formValidation: function(form, options) {
         var conf = {
-            'errCls':'w3s-invalid'
+            'errCls':'w3s-invalid',
 			'tags':null
         };
         if (options) $.extend(conf, options);
