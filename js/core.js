@@ -296,7 +296,7 @@ W3S.Core.Ajax = {
                     'left:'+pos.left+'px;top:'+pos.top+'px;'+
                     'height:'+cover.outerHeight()+'px;width:'+cover.outerWidth()+'px;"></div>');
         // 100% height doesn't work in some cases
-        var errorMsg = W3S.Core.Ajax.fieldValidation(form, {errCls:'w3s-error'});
+        var errorMsg = W3S.Core.Ajax.formValidation(form, {errCls:'w3s-error'});
         if (errorMsg) {
             $('.w3s-loading').remove();
             W3S.Core.Util.print(errorMsg);
@@ -305,37 +305,31 @@ W3S.Core.Ajax = {
         return true;
     },
     // field data verification
-    fieldValidation: function(form, options) {
+    // check value with type given by class and return error code if error or empty string if OK
+    fieldValidation: function(field, regularExp) {
+		if (regularExp) return field.val().match(regularExp)?'':'InvalidDataFormat';
+        if (field..hasClass('w3s-data-mandatory')&&!field.val().match(/[^\s]+/)) return 'DataInsufficient';
+        if (field..hasClass('w3s-data-alphaNum')&&!field.val().match(/^s*\w+\s*$/i)) return 'InvalidDataFormat';
+        if (field..hasClass('w3s-data-alpha')&&!field.val().match(/^s*[A-z]\+\s*$/i)) return 'InvalidDataFormat';
+        if (field..hasClass('w3s-data-numeric')&&!field.val().match(/^s*[0-9]\+\s*$/i)) return 'InvalidDataFormat';
+        if (field..hasClass('w3s-data-email')&&!field.val().match(/^[^@]+@[^@\.]+\.[^@]+$/i)) return 'InvalidEmailAddress';
+        return '';
+    },
+    // form data validation
+    formValidation: function(form, options) {
         var conf = {
-            'errCls':'red'
+            'errCls':'w3s-invalid'
         };
         if (options) $.extend(conf, options);
-        var failure = false;
-        form.find('.w3s-mandatory').each(function() {
-            $(this).removeClass(conf.errCls);
-            if (!$(this).val().match(/[^\s]+/)) {
+        var error = '';
+        form.find(':input:visible').each(function(){
+            error = W3S.Core.Ajax.fieldValidation($(this), '');
+            if (error) {
                 $(this).addClass(conf.errCls);
-                failure = true;
+                return;
             }
         });
-        if (failure) return 'DataInsufficient';
-        form.find('.w3s-data-alphaNum').each(function() {
-            $(this).removeClass(conf.errCls);
-            if (!$(this).val().match(/^s*\w+\s*$/i)) {
-                failure = true;
-                $(this).addClass(conf.errCls);
-            }
-        });
-        if (failure) return 'InvalidDataFormat';
-        form.find('.w3s-data-email').each(function() {
-            $(this).removeClass(conf.errCls);
-            if (!$(this).val().match(/^[^@]+@[^@\.]+\.[^@]+$/i)) {
-                $(this).addClass(conf.errCls);
-                failure = true;
-            }
-        });
-        if (failure) return 'InvalidEmailAddress';
-        return '';
+        return error;
     }
 };
 // W3S Event switch
