@@ -307,12 +307,38 @@ W3S.Core.Ajax = {
     // field data verification
     // check value with type given by class and return error code if error or empty string if OK
     fieldValidation: function(field, regularExp) {
+		var tags = {
+			'w3s-data-mandatory':'[^\\s]',
+			'w3s-data-alphaNum':'\\w',
+			'w3s-data-alpha':'[A-z]',
+			'w3s-data-numeric':'[0-9]',
+			'w3s-data-hex':'[0-9a-fA-F]',
+			'w3s-data-email':'[^@]+@[^@\.]+\.[^@]+',
+			'w3s-data-date-ymd':'\\d{4}[\\/\\.]?\\d\\d[\\/\\.]?\\d\\d',
+			'w3s-data-date-dmy':'\\d\\d\\/?\\d\\d\\/?\\d{4}',
+			'w3s-data-date-mdy':'\\d\\d\\/?\\d\\d\\/?\\d{4}'
+		};
 		if (regularExp) return field.val().match(regularExp)?'':'InvalidDataFormat';
-        if (field..hasClass('w3s-data-mandatory')&&!field.val().match(/[^\s]+/)) return 'DataInsufficient';
-        if (field..hasClass('w3s-data-alphaNum')&&!field.val().match(/^s*\w+\s*$/i)) return 'InvalidDataFormat';
-        if (field..hasClass('w3s-data-alpha')&&!field.val().match(/^s*[A-z]\+\s*$/i)) return 'InvalidDataFormat';
-        if (field..hasClass('w3s-data-numeric')&&!field.val().match(/^s*[0-9]\+\s*$/i)) return 'InvalidDataFormat';
-        if (field..hasClass('w3s-data-email')&&!field.val().match(/^[^@]+@[^@\.]+\.[^@]+$/i)) return 'InvalidEmailAddress';
+		var val = $.trim(field.val());
+		var classes = field.attr('class').split(/\s+/);
+		for (var i in classes) {
+			var type = classes[i];
+			for (var tag in tags) {
+				var rexp = tags[tag];
+				if (type!==tag) {
+					if (type.indexOf(tag)!==-1) {
+						var len = parseInt(type.substr(tag));
+						if (len>0) {
+							rexp +='{'+len+',}';
+						} else if (tag=='w3s-data-mandatory') {
+							rexp +='+';
+						}
+					}
+				}
+				rexp = '/^'+rexp+'$/';
+				if (!val.match(rexp)) return tag;
+			}
+		}
         return '';
     },
     // form data validation
