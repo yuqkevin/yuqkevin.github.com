@@ -314,7 +314,7 @@ W3S.Core.Ajax = {
 			'w3s-data-numeric':'[0-9]',
 			'w3s-data-hex':'[0-9a-fA-F]',
 			'w3s-data-email':'[^@]+@[^@\.]+\.[^@]+',
-			'w3s-data-date-ymd':'\\d{4}[\\/\\.]?\\d\\d[\\/\\.]?\\d\\d',
+			'w3s-data-date-ymd':'\\d{4}[\\/\\-\\.]?\\d\\d[\\/\\-\\.]?\\d\\d',
 			'w3s-data-date-dmy':'\\d\\d\\/?\\d\\d\\/?\\d{4}',
 			'w3s-data-date-mdy':'\\d\\d\\/?\\d\\d\\/?\\d{4}'
 		};
