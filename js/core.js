@@ -341,7 +341,6 @@ W3S.Core.Ajax = {
 					}
 				}
 				rexp = '^'+rexp+'$';
-console.log(field.getAttr('name')+' val:'+val+' type:'+type+' tag:'+tag+' rexp:'+rexp+'  res:'+val.search(rexp));
 				return val.search(rexp)===-1?tag:'';
 			}
 		}
