@@ -339,7 +339,7 @@ console.log('type:'+type+'  tag:'+tag);
 				} else if (tag=='w3s-data-mandatory'){
 					rexp +='+';
 				}
-				rexp = '/^'+rexp+'$/';
+				rexp = '^'+rexp+'$';
 console.log('regexp:'+rexp+' result:'+val.match(rexp));
 				if (!val.match(rexp)) return tag;
 			}
