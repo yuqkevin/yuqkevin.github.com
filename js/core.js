@@ -340,8 +340,8 @@ W3S.Core.Ajax = {
 					}
 				}
 				rexp = '^'+rexp+'$';
-console.log(field.getAttr('name')+':'+val+' regexp:'+rexp+' result:'+val.match(rexp));
-				if (!val.match(rexp)) return tag;
+console.log(field.getAttr('name')+':'+val+' regexp:'+rexp+' result:'+val.search(rexp));
+				if (val.search(rexp)===-1) return tag;
 			}
 		}
         return '';
