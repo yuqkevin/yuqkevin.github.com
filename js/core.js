@@ -333,10 +333,12 @@ W3S.Core.Ajax = {
 						} else if (tag=='w3s-data-mandatory') {
 							rexp +='+';
 						}
+					} else {
+						return '';
 					}
 				}
 				rexp = '/^'+rexp+'$/';
-console.log('val:'+val+'  regexp:'+rexp);
+console.log('val:'+val+'  regexp:'+rexp+' result:'+val.match(rexp));
 				if (!val.match(rexp)) return tag;
 			}
 		}
@@ -350,7 +352,7 @@ console.log('val:'+val+'  regexp:'+rexp);
         if (options) $.extend(conf, options);
         var error = '';
         form.find(':input:visible').each(function(){
-            error = W3S.Core.Ajax.fieldValidation($(this), '');
+            error = W3S.Core.Ajax.fieldValidation($(this));
             if (error) {
                 $(this).addClass(conf.errCls);
                 return;
