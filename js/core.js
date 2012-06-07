@@ -321,10 +321,12 @@ W3S.Core.Ajax = {
 		if (regularExp) return field.val().match(regularExp)?'':'InvalidDataFormat';
 		var val = $.trim(field.val());
 		var classes = field.getAttr('class').split(/\s+/);
+console.log('field:'+field.name+' val:'+val);
 		for (var i in classes) {
 			var type = classes[i];
 			for (var tag in tags) {
 				var rexp = tags[tag];
+console.log('type:'+type+'  tag:'+tag);
 				if (type!==tag) {
 					if (type.indexOf(tag)!==-1) {
 						var len = parseInt(type.substr(tag));
@@ -338,7 +340,7 @@ W3S.Core.Ajax = {
 					}
 				}
 				rexp = '/^'+rexp+'$/';
-console.log('val:'+val+'  regexp:'+rexp+' result:'+val.match(rexp));
+console.log('regexp:'+rexp+' result:'+val.match(rexp));
 				if (!val.match(rexp)) return tag;
 			}
 		}
