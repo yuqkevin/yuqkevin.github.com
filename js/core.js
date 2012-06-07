@@ -333,6 +333,7 @@ W3S.Core.Ajax = {
 					if (type.indexOf(tag)!==-1) {
 						var len = parseInt(type.substr(tag));
 						if (len>0) {
+							// tag with length specific. e.g w3s-data-mandatory5 means at least 5 chars
 							rexp +='{'+len+',}';
 						}
 					} else {
@@ -349,7 +350,7 @@ W3S.Core.Ajax = {
     formValidation: function(form, options) {
         var conf = {
             'errCls':'w3s-invalid',
-			'tags':null
+			'tags':null	// verify tag object {code1:regexp1,code2:regexp2,...}
         };
         if (options) $.extend(conf, options);
         var error = '';
