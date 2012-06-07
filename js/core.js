@@ -502,15 +502,15 @@ W3S.Core.Event.Handler = {
                         form.w3sForm(conf);
                     }
                 }
-				var button = trigger.text();
+				var btnText = trigger.text();
 				if (options.url&&options.url!=='#') {
-                    button = options.url.substr(0,1)=='#'?options.url.substr(1):options.url;
+                    btnText = options.url.substr(0,1)=='#'?options.url.substr(1):options.url;
                 }
 				var btnObj = form.find('input[name="_button"]');
                 if (btnObj.length) {
-					btnObj.val(token);
+					btnObj.val(btnText);
                 } else {
-                    form.append('<input type="hidden" name="_button" value="'+token+'" />');
+                    form.append('<input type="hidden" name="_button" value="'+btnText+'" />');
 				}
                 form.trigger('submit');
                 break;
