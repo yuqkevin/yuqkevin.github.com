@@ -320,7 +320,7 @@ W3S.Core.Ajax = {
 		};
 		if (regularExp) return field.val().match(regularExp)?'':'InvalidDataFormat';
 		var val = $.trim(field.val());
-		var classes = field.attr('class').split(/\s+/);
+		var classes = field.getAttr('class').split(/\s+/);
 		for (var i in classes) {
 			var type = classes[i];
 			for (var tag in tags) {
