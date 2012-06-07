@@ -331,7 +331,7 @@ W3S.Core.Ajax = {
 					return '';
 				} else if (type!==tag) {
 					if (type.indexOf(tag)!==-1) {
-						var len = parseInt(type.substr(tag));
+						var len = parseInt(type.substr(tag.length));
 						if (len>0) {
 							// tag with length specific. e.g w3s-data-mandatory5 means at least 5 chars
 							rexp +='{'+len+',}';
