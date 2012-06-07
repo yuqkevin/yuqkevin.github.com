@@ -336,6 +336,7 @@ W3S.Core.Ajax = {
 					}
 				}
 				rexp = '/^'+rexp+'$/';
+console.log('val:'+val+'  regexp:'+rexp);
 				if (!val.match(rexp)) return tag;
 			}
 		}
