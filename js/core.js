@@ -321,12 +321,11 @@ W3S.Core.Ajax = {
 		if (regularExp) return field.val().match(regularExp)?'':'InvalidDataFormat';
 		var val = $.trim(field.val());
 		var classes = field.getAttr('class').split(/\s+/);
-console.log('field:'+field.name+' val:'+val);
+console.log('field:'+field.getAttr('name')+' val:'+val);
 		for (var i in classes) {
 			var type = classes[i];
 			for (var tag in tags) {
 				var rexp = tags[tag];
-console.log('type:'+type+'  tag:'+tag);
 				if (type!==tag) {
 					if (type.indexOf(tag)!==-1) {
 						var len = parseInt(type.substr(tag));
@@ -334,7 +333,7 @@ console.log('type:'+type+'  tag:'+tag);
 							rexp +='{'+len+',}';
 						}
 					} else {
-						return '';
+						continue;
 					}
 				} else if (tag=='w3s-data-mandatory'){
 					rexp +='+';
