@@ -306,7 +306,7 @@ W3S.Core.Ajax = {
     },
     // field data verification
     // check value with type given by class and return error code if error or empty string if OK
-    fieldValidation: function(field, regularExp) {
+    fieldValidation: function(field, tagOptions) {
 		var tags = {
 			'w3s-data-mandatory':'[^\\s]',
 			'w3s-data-alphaNum':'\\w',
@@ -318,7 +318,7 @@ W3S.Core.Ajax = {
 			'w3s-data-date-dmy':'\\d\\d\\/?\\d\\d\\/?\\d{4}',
 			'w3s-data-date-mdy':'\\d\\d\\/?\\d\\d\\/?\\d{4}'
 		};
-		if (regularExp) return field.val().match(regularExp)?'':'InvalidDataFormat';
+        if (tagOptions) $.extend(tags, tagOptions);
 		var val = $.trim(field.val());
 		var classes = field.getAttr('class').split(/\s+/);
 		for (var i in classes) {
@@ -340,7 +340,6 @@ W3S.Core.Ajax = {
 					}
 				}
 				rexp = '^'+rexp+'$';
-console.log(field.getAttr('name')+':'+val+' regexp:'+rexp+' result:'+val.search(rexp));
 				return val.search(rexp)===-1?tag:'';
 			}
 		}
@@ -350,11 +349,12 @@ console.log(field.getAttr('name')+':'+val+' regexp:'+rexp+' result:'+val.search(
     formValidation: function(form, options) {
         var conf = {
             'errCls':'w3s-invalid'
+			'tags':null
         };
         if (options) $.extend(conf, options);
         var error = '';
         form.find(':input:visible').each(function(){
-            error = W3S.Core.Ajax.fieldValidation($(this));
+            error = W3S.Core.Ajax.fieldValidation($(this), conf.tags);
             if (error) {
                 $(this).addClass(conf.errCls);
                 return error;
