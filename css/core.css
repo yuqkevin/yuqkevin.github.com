@@ -184,7 +184,7 @@ div.w3s-rotator {position:relative;}
 div.w3s-popup {background:transparent;}
    .w3s-popup div.w3s-box {margin:0;padding:0;border:1px solid #788B21;width:1px;height:0;overflow:hidden;}
 
-div.w3s-box .w3s-header {height:auto;margin:0;padding:0;background:#788B21;font-family:Arial;}
+div.w3s-box .w3s-header {height:1.5em;margin:0;padding:0;background:#788B21;font-family:Arial;}
 div.w3s-box .w3s-header h1.w3s-title {padding:5px;font-size:14px;font-weight:bold;color:#fff;}
 div.w3s-box .w3s-header div.w3s-button {padding:0;float:right;font-size:13px;}
 div.w3s-box .w3s-header div.w3s-button a {padding:0;margin:2px 0;}
