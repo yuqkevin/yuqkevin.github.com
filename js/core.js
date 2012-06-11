@@ -75,7 +75,7 @@ W3S.Core.Util = {
         body.siblings().each(function(){h += $(this).is(':hidden')?0:$(this).outerHeight(true);});
         var p_height = Math.min(h,maxHeight);
         var wtop = ($(window).height()-p_height)/2;
-        box.css({'position':'fixed','left':wleft,'top':wtop,'width':body.outerWidth(),height:p_height});
+        box.css({'position':'fixed','left':wleft,'top':wtop,'width':body.outerWidth(),'height':p_height});
         body.height(p_height).addClass('w3s-mainbox').w3sBox('resize');
     },
     //read url from a.href and remove base url (which automatically added in IE)
