@@ -1,7 +1,7 @@
 /*
  * jQuery Plugin and Core functions for SimplyUI, A W3S Framework
  * version: 0.1 (2011.11.1)
- * @requires jQuery v1.4 or later
+ * @requires jQuery v1.4
 
  * Licensed under the GNU General Public License
  *   http://www.gnu.org/licenses/gpl.html
