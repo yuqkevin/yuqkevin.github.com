@@ -218,6 +218,11 @@ W3S.Core.Ajax = {
     // handler for success ajax post
     success: function(response, status, xhr, f) {
         var form = f?f:$('form').first();  // for version <1.4, no xhr defined, the third argv is f and no 4th argv
+		var wrapper = form.closest('.w3s-wrapper');
+		if (wrapper.length<1) {
+			wrapper = $('.w3s-wrapper').first();
+			form = wrapper.find('form').first();
+		}
         $('.w3s-loading').remove();
         var res;
         if (typeof response=='string') {
@@ -253,22 +258,22 @@ W3S.Core.Ajax = {
                     }
                 }
             } else if (res.success=='close') {
-                form.closest('.w3s-wrapper').remove();
+                wrapper.remove();
             } else if (res.success=='reset') {
                 form[0].reset();
             } else if (res.success=='reset&reload'&&res.target) {
                 form[0].reset();
                 W3S.Core.Ajax.refresh(res.target);
             } else if (res.success=='close&reload'&&res.target) {
-                form.closest('.w3s-wrapper').remove();
+                wrapper.remove();
                 W3S.Core.Ajax.refresh(res.target);
             } else if (res.success=='close&trigger'&&res.target&&res.action) {
-                form.closest('.w3s-wrapper').remove();
+                wrapper.remove();
                 $(W3S.Core.Util.formatId(res.target)).trigger(res.action);
             } else if (res.success=='trigger'&&res.target&&res.action) {
                 $(W3S.Core.Util.formatId(res.target)).trigger(res.action);
             } else if (res.success=='close&load'&&res.target&&res.url) {
-                form.closest('.w3s-wrapper').remove();
+                wrapper.remove();
                 $(W3S.Core.Util.formatId(res.target)).load(res.url);
             } else if (res.success=='re-trigger') {
                 W3S.Core.curTrigger.trigger('click');
