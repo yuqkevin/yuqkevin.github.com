@@ -12,7 +12,7 @@
 var W3S = W3S || {};
 W3S.Core = W3S.Core||{};
 W3S.Core.sequence = W3S.Core.sequence || 1;  // shared sequence for generic use
-W3S.Core.curTrigger;
+W3S.Core.TopVar = W3S.Core.TopVar||{}; // store of top/latest variable: DomId, object, etc
 W3S.Core.Store = W3S.Core.Store||{};
 W3S.Core.Boxes = {'tab':'.w3s-tab','accordion':'.w3s-accordion','rotator':'.w3s-rotator','grid':'.w3s-grid','tree':'.w3s-tree','dropdown':'.w3s-dropdown','autocomplete':'.w3s-autocomplete'};
 W3S.Core.Constant = W3S.Core.Constant||{};
@@ -240,7 +240,7 @@ W3S.Core.Ajax = {
             res = response;
         }
 
-        if (res.message) W3S.Core.Util.print(res.message);
+        if (res.message) W3S.Core.Util.print(res.message, res.box);
         if (res.success) {
             if (res.success=='reload') {
                 if (res.target) {
@@ -276,7 +276,7 @@ W3S.Core.Ajax = {
                 wrapper.remove();
                 $(W3S.Core.Util.formatId(res.target)).load(res.url);
             } else if (res.success=='re-trigger') {
-                W3S.Core.curTrigger.trigger('click');
+                W3S.Core.TopVar.trigger.trigger('click');
             } else if (res.success=='load'&&res.url) {
                 if (res.target) {
                     W3S.Core.Ajax.action(res.url, W3S.Core.Util.formatId(res.target));
@@ -376,7 +376,7 @@ W3S.Core.Event = {
         var a = $(evt.currentTarget);
         if (a.hasClass('w3s-stop')) evt.stopPropagation();
         // remember trigger which is not form submit or .w3s-tmp
-        if (!a.hasClass('w3s-tmp')&&a.attr('name')!='submit') W3S.Core.curTrigger = a;
+        if (!a.hasClass('w3s-tmp')&&a.attr('name')!='submit') W3S.Core.TopVar.trigger = a;
         if (a.hasClass('w3s-disabled')) return false;
         if (!a.getAttr('rel') || confirm(a.attr('rel'))) {
             W3S.Core.Event.Handler.triggerParse(a, evt);
