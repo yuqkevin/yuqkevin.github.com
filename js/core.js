@@ -11,6 +11,7 @@
 
 var W3S = W3S || {};
 W3S.Core = W3S.Core||{};
+W3S.Core.Dictionary = W3S.Core.Dictionary||{};
 W3S.Core.sequence = W3S.Core.sequence || 1;  // shared sequence for generic use
 W3S.Core.TopVar = W3S.Core.TopVar||{}; // store of top/latest variable: DomId, object, etc
 W3S.Core.Store = W3S.Core.Store||{};
@@ -301,10 +302,11 @@ W3S.Core.Ajax = {
                     'left:'+pos.left+'px;top:'+pos.top+'px;'+
                     'height:'+cover.outerHeight()+'px;width:'+cover.outerWidth()+'px;"></div>');
         // 100% height doesn't work in some cases
-        var errorMsg = W3S.Core.Ajax.formValidation(form, {errCls:'w3s-error'});
-        if (errorMsg) {
+        var errTag = W3S.Core.Ajax.formValidation(form, {errCls:'w3s-error'});
+        if (errTag) {
             $('.w3s-loading').remove();
-            W3S.Core.Util.print(errorMsg);
+			var errMsg = W3S.Core.Dictionary[errTag]===W3S.Core.Constant.undefined?errTag:W3S.Core.Dictionary[errTag];
+            W3S.Core.Util.print(errMsg);
             return false;
         }
         return true;
@@ -359,11 +361,11 @@ W3S.Core.Ajax = {
         };
         if (options) $.extend(conf, options);
         var error = '';
-        form.find(':input:visible').each(function(){
+        form.find(':input:visible').each(function() {
             error = W3S.Core.Ajax.fieldValidation($(this), conf.tags);
             if (error) {
                 $(this).addClass(conf.errCls);
-                return error;
+                return false;
             }
         });
         return error;
