@@ -971,6 +971,18 @@ W3S.Core.Event.Handler = {
             });
         }
     };
+	//center a box. major code comes from http://stackoverflow.com/questions/210717/using-jquery-to-center-a-div-on-the-screen.
+	$.fn.center = function(options) {
+		var conf = {
+			'parent':'window'	// window or parent
+		}
+		if (options) $.extend(conf, options);
+		var parent = conf.parent=='window'?$(window):this.parent();
+	    this.css("position","absolute");
+    	this.css("top", Math.max(0, ((parent.height() - this.outerHeight()) / 2) + parent.scrollTop()) + "px");
+	    this.css("left", Math.max(0, ((parent.width() - this.outerWidth()) / 2) + parent.scrollLeft()) + "px");
+    	return this;
+	};
 	// check if attribute is defined
     $.fn.hasAttr = function(attrName) {
         var undefined;
