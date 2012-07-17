@@ -303,7 +303,7 @@ W3S.Core.Ajax = {
                     'height:'+cover.outerHeight()+'px;width:'+cover.outerWidth()+'px;"></div>');
         // 100% height doesn't work in some cases
         var errTag = W3S.Core.Ajax.formValidation(form, {errCls:'w3s-error'});
-        if (errTag.length) {
+        if (errTag) {
             $('.w3s-loading').remove();
 			var errMsg = W3S.Core.Dictionary[errTag]===W3S.Core.Constant.undefined?errTag:W3S.Core.Dictionary[errTag];
             W3S.Core.Util.print(errMsg);
@@ -315,7 +315,7 @@ W3S.Core.Ajax = {
     // check value with type given by class and return error code if error or empty string if OK
     fieldValidation: function(field, tagOptions) {
 		var tags = {
-			'w3s-data-mandatory':'.*',
+			'w3s-data-mandatory':'.',
 			'w3s-data-alphaNum':'\\w',
 			'w3s-data-alpha':'[A-z]',
 			'w3s-data-numeric':'[0-9]',
@@ -347,7 +347,6 @@ W3S.Core.Ajax = {
 						continue;
 					}
 				}
-				rexp = '/^'+rexp+'$/';
 				return val.search(rexp)===-1?tag:'';
 			}
 		}
@@ -363,9 +362,9 @@ W3S.Core.Ajax = {
         var error = '';
         form.find(':input:visible').each(function() {
             error = W3S.Core.Ajax.fieldValidation($(this), conf.tags);
-            if (error.length) {
+            if (error) {
                 $(this).addClass(conf.errCls);
-                return error;
+                return false;	// break each
             }
         });
         return error;
