@@ -201,7 +201,7 @@ W3S.Core.Ajax = {
     //reload a W3S box with the url stored in the W3S.Core.Store.Dom
     refresh: function(targetId) {
 		var target = $(W3S.Core.Util.formatId(targetId));
-		while (target.not('body')&&target.siblings('.w3s-store_url').length<1) {
+		while (target.prop('tagName')!='BODY'&&target.siblings('.w3s-store_url').length<1) {
 			// find cloisest reloadable target
 			target = target.parent();
 		}
@@ -267,7 +267,11 @@ W3S.Core.Ajax = {
                 W3S.Core.Ajax.refresh(res.target);
             } else if (res.success=='close&reload'&&res.target) {
                 wrapper.remove();
-                W3S.Core.Ajax.refresh(res.target);
+				if (res.target=='trigger') {
+					W3S.Core.Ajax.refresh(W3S.Core.TopVar.trigger.attr('id'));
+				} else {
+                	W3S.Core.Ajax.refresh(res.target);
+				}
             } else if (res.success=='close&trigger'&&res.target&&res.action) {
                 wrapper.remove();
                 $(W3S.Core.Util.formatId(res.target)).trigger(res.action);
@@ -377,6 +381,7 @@ W3S.Core.Event = {
         var a = $(evt.currentTarget);
         if (a.hasClass('w3s-stop')) evt.stopPropagation();
         // remember trigger which is not form submit or .w3s-tmp
+		if (!a.getAttr('id')) a.attr('id', 'trigger-'+(++W3S.Core.sequence));
         if (!a.hasClass('w3s-tmp')&&a.attr('name')!='submit') W3S.Core.TopVar.trigger = a;
         if (a.hasClass('w3s-disabled')) return false;
         if (!a.getAttr('rel') || confirm(a.attr('rel'))) {
