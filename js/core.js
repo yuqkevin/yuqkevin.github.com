@@ -1,7 +1,7 @@
 /*
  * jQuery Plugin and Core functions for SimplyUI, A W3S Framework
  * version: 0.1 (2011.11.1)
- * @requires jQuery v1.4
+ * @requires jQuery v1.6
 
  * Licensed under the GNU General Public License
  *   http://www.gnu.org/licenses/gpl.html
@@ -879,29 +879,28 @@ W3S.Core.Event.Handler = {
         tree: function(options) {
             var eventHandler =  function(evt) {
                 evt.preventDefault();
-                var item = $(evt.currentTarget).closest('li');
-                if (item.is('.w3s-node')) {
-                    if (item.is('.w3s-nodeopen')) {
-                        item.find('>ul').fadeOut('fast','linear');
-                        item.removeClass('w3s-nodeopen');
-                    } else {
-                        item.find('>ul').fadeIn('fast','linear');
-                        item.addClass('w3s-nodeopen');
-                    }
+                var item = $(evt.currentTarget).parent(); // <li>
+                if (item.is('.w3s-tree-nodeopen')) {
+                    item.find('>ul').fadeOut('fast','linear');
+                    item.removeClass('w3s-tree-nodeopen');
+                } else {
+                    item.find('>ul').fadeIn('fast','linear');
+                    item.addClass('w3s-tree-nodeopen');
                 }
                 return true;
             };
             return this.each(function() {
                 if ($(this).is(':visible:not(.w3s-stop)')) {
                     $(this).addClass('w3s-stop');
-                    $(this).find('li .w3s-title').bind('click',eventHandler);
-                    var expand = $(this).is('.w3s-expand');
-                    var nodeCls = 'w3s-node'+ (expand?' w3s-nodeopen':'');
-                    $(this).find('li').each(function(){$(this).addClass($(this).find('ul').length?nodeCls:'w3s-leaf');});
-                    if (expand) $(this).find('.w3s-node>ul').css('display','block');
+                    var expand = $(this).is('.w3s-tree-expand');
+                    var nodeCls = 'w3s-tree-node'+ (expand?' w3s-tree-nodeopen':'');
+                    $(this).find('li').each(function(){$(this).addClass($(this).find('ul').length?nodeCls:'w3s-tree-leaf');});
+                    if (expand) $(this).find('li>ul').css('display','block');
+                    $(this).find('li.w3s-tree-node>span').bind('click',eventHandler);
                 }
             });
         },
+		// autocomplete feature is still experimental. no keyboard select support at this moment
         autocomplete: function(options) {
             // filter listing by give value and return new listing
             var listFilter = function (list, val) {
