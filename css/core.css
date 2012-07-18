@@ -145,13 +145,12 @@ ul.w3s-autocomplete li:hover {background:#eee;color:black;}
 input.w3s-autocomplete {padding-left:5px;padding-right:5px;}
 
 /*** tree ***/
-div.w3s-tree ul {list-style-type:none;list-style-position:inside;padding:0px;margin:0px;}
-div.w3s-tree ul li {padding:3px;padding-left:1em;}
-div.w3s-tree li>ul {display:none;}
-   .w3s-tree li>span {padding-left:2em;}
-   .w3s-tree .w3s-node {background:url(images/folder.gif) no-repeat left 3px;padding-left:20px;}
-   .w3s-tree .w3s-nodeopen {background:url(images/folderopen.gif) no-repeat left 3px;padding-left:20px;}
-   .w3s-tree .w3s-leaf {background:url(images/page.gif) no-repeat left center;padding-left:20px;}
+div.w3s-tree ul {list-style-type:none;padding:5px;margin:0px;line-height:1.2em;}
+div.w3s-tree li li {padding:3px;padding-left:1.5em;}
+div.w3s-tree li>ul {display:none;padding:0px;}
+   .w3s-tree li.w3s-tree-node>span {background:url(images/folder.gif) no-repeat left 3px;padding-left:20px;}
+   .w3s-tree li.w3s-tree-nodeopen>span {background:url(images/folderopen.gif) no-repeat left 3px;padding-left:20px;}
+   .w3s-tree li.w3s-tree-leaf>span {background:url(images/page.gif) no-repeat left center;padding-left:20px;}
 
 /*** accordion ***/
 div.w3s-accordion {margin:0;padding:0;width:20em;height:20em;border:1px solid #777777;background:#EEEEEE;}
